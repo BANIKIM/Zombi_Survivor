@@ -6,6 +6,7 @@ public class Plyer_Movement : MonoBehaviour
 {
     [SerializeField] private float Movespeed = 5f;
     [SerializeField] private float RotateSpeed = 180f;
+    [SerializeField] private Camera followCamera;
 
     [SerializeField] private Player_Input player_input;
     private Rigidbody player_r;
@@ -34,10 +35,23 @@ public class Plyer_Movement : MonoBehaviour
 
     private void Rotate()
     {
-        float turn = player_input.Rotate_Value * RotateSpeed * Time.deltaTime;
+        //키보드 회전
+        /* float turn = player_input.Rotate_Value * RotateSpeed * Time.deltaTime;
 
-        player_r.rotation = player_r.rotation * Quaternion.Euler(0, turn, 0);
+         player_r.rotation = player_r.rotation * Quaternion.Euler(0, turn, 0);*/
 
-    
+        //마우스 회전
+        Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayhit;
+        if (Physics.Raycast(ray, out rayhit, 100))
+        {
+            Vector3 nextVec = rayhit.point - transform.position;
+            // nextVec.x = 0;
+            nextVec.y = 0;
+            // nextVec.z = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
+
     }
 }
