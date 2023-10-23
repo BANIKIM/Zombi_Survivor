@@ -20,6 +20,14 @@ public class Player_Input : MonoBehaviour
     private void Update()
     {
         //나중에 게임오버를 만든다면 못 움직이게 선언해주세요...
+        if(GameManager.Instance!=null && GameManager.Instance.isGameover)
+        {
+            Move_Value = 0;
+            Rotate_Value = 0;
+            isFire = false;
+            isReload = false;
+            return;
+        }
 
         Move_Value = Input.GetAxis(MoveAxis_name);//움직임
         Rotate_Value = Input.GetAxis(Rotate_name);//몸을 돌리는것

@@ -8,7 +8,6 @@ public class Plyer_Movement : MonoBehaviour
     [SerializeField] private float RotateSpeed = 180f;
 
     [SerializeField] private Player_Input player_input;
-
     private Rigidbody player_r;
     private Animator player_ani;
 
@@ -37,5 +36,7 @@ public class Plyer_Movement : MonoBehaviour
         float turn = player_input.Rotate_Value * RotateSpeed * Time.deltaTime;
 
         player_r.rotation = player_r.rotation * Quaternion.Euler(0, turn, 0);
+
+    
     }
 }
