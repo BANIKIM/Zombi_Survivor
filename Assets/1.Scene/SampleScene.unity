@@ -720,6 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Movespeed: 5
   RotateSpeed: 180
+  followCamera: {fileID: 963194227}
   player_input: {fileID: 0}
 --- !u!114 &1026474394
 MonoBehaviour:
