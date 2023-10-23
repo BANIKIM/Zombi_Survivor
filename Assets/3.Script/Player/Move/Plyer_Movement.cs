@@ -23,6 +23,7 @@ public class Plyer_Movement : MonoBehaviour
         Move();
         Rotate();
         player_ani.SetFloat("Move",player_input.Move_Value);
+        
     }
     private void Move()
     {

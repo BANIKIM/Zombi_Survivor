@@ -12,7 +12,7 @@ public class LivingEntity : MonoBehaviour,IDamage
      * 죽었는지 살았는지 -> 이벤트로 처리를 할것인데 유니티에서 지원하는 액션이라고 있음
      * 
      */
-
+    PlayerHealth playerHealth;
     public float StartHeath = 100f;
     public float Heath { get; protected set; }
     public bool isDead { get; protected set; }
@@ -24,7 +24,10 @@ public class LivingEntity : MonoBehaviour,IDamage
         isDead = false;
         Heath = StartHeath;
     }
-
+    private void Start()
+    {
+        playerHealth = GetComponent<PlayerHealth>();
+    }
 
     public virtual void OnDamage(float Damage, Vector3 hitposition, Vector3 hitNomal)
     {
@@ -52,7 +55,27 @@ public class LivingEntity : MonoBehaviour,IDamage
             return;
         }
         Heath += newHealth;
+        if(Heath >= StartHeath)
+        {
+            Heath = StartHeath;
+        }
+        playerHealth.healthSlider.value = Heath;
+        Debug.Log("체력회복");
+        
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(!isDead)
+        {
+            IItem itme = other.GetComponent<IItem>();
+
+            if(itme != null)
+            {
+                itme.Use(gameObject);
+
+            }
+        }
+    }
 
 }
